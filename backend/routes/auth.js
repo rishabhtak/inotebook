@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('../models/Users');
+const User = require('../models/User');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
@@ -98,9 +98,8 @@ router.post('/login',
 
 router.post('/getuser', fetchuser,
    async (req, res) => {
-
       try {
-         const userId = req.id;
+         const userId = req.user.id;
          const user = await User.findById(userId).select("-password");
          res.json({ user })
       }

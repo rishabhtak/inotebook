@@ -10,21 +10,22 @@ import {
 
 const App = createBrowserRouter([
   {
-    element: <NoteState />,
-    children: [{
-      element: <Navbar />,
-      children: [
-        {
-          path: "/",
-          element: <Home />,
-        },
-        {
-          path: "/about",
-          element: <About />,
-        },
-      ],
-    }],
-
+    element: <Navbar />,
+    children: [
+      {
+        element: <NoteState />,
+        children: [
+          {
+            path: "/",
+            element: <Home />,
+          },
+          {
+            path: "/about",
+            element: <About />,
+          },
+        ],
+      }
+    ],
   },
 ]);
 

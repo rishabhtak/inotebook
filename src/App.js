@@ -10,10 +10,10 @@ import {
 
 const App = createBrowserRouter([
   {
-    element: <Navbar />,
+    element: <NoteState />,
     children: [
       {
-        element: <NoteState />,
+        element: <Navbar />,
         children: [
           {
             path: "/",

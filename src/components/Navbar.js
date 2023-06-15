@@ -1,5 +1,6 @@
 import React from 'react';
-import { Outlet, Link, NavLink, useLocation } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
+import Alert from './Alert';
 
 function Navbar() {
     let location = useLocation();
@@ -32,6 +33,7 @@ function Navbar() {
                     </div>
                 </div>
             </nav >
+            <Alert message="This is alert" />
             <Outlet />
         </>
     )

@@ -6,8 +6,6 @@ function Navbar() {
     let location = useLocation();
 
     React.useEffect(() => {
-        console.log(location)
-
     }, [location]);
     return (
         <>

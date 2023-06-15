@@ -11,7 +11,6 @@ const NoteState = () => {
 
     useEffect(() => {
         getNotes()
-
     }, [])
 
 
@@ -25,8 +24,8 @@ const NoteState = () => {
                 "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ4ODgyMzYxZDU5Yjg3NGU5MjgzMWQxIn0sImlhdCI6MTY4Njg1NTI4OX0.nIwmfe1JP_KZp5v-STrRaW38BlcYZd_f75T0RazdzHA"
             },
         });
-        const note = await response.json();
-        setNotes(note);
+        const allNotes = await response.json();
+        setNotes(allNotes);
 
     }
     const addNote = async (title, description, tag) => {
@@ -40,7 +39,6 @@ const NoteState = () => {
             body: JSON.stringify({ title, description, tag })
         });
         const note = await response.json();
-        console.log(note)
         setNotes(notes.concat(note))
     }
 
@@ -67,22 +65,25 @@ const NoteState = () => {
             },
             body: JSON.stringify({ title, description, tag })
         });
-        const json = response.json();
-        //logic to edit in client
-        /*     for (let index = 0; index < notes.length; index++) {
-                 const element = notes[index];
-                 if (element._id === id) {
-                     element.title = title,
-                         element.description = description,
-                         element.tag = tag
-                 }
-     
-             }*/
+        const json = await response.json();
+
+        let newNotes = JSON.parse(JSON.stringify(notes))
+        // Logic to edit in client
+        for (let index = 0; index < newNotes.length; index++) {
+            const element = newNotes[index];
+            if (element._id === id) {
+                newNotes[index].title = title;
+                newNotes[index].description = description;
+                newNotes[index].tag = tag;
+                break;
+            }
+        }
+        setNotes(newNotes);
     }
 
 
     return (
-        <NoteContext.Provider value={{ notes, setNotes, addNote, deleteNote, getNotes }}>
+        <NoteContext.Provider value={{ notes, setNotes, addNote, deleteNote, getNotes, editNote }}>
             <Outlet />
         </NoteContext.Provider>
     )

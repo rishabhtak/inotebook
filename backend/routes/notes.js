@@ -10,9 +10,10 @@ const { body, validationResult } = require('express-validator');
 
 router.get('/fetchallnotes', fetchuser,
    async (req, res) => {
+      console.log(req)
       try {
          const notes = await Note.find({ user: req.user.id })
-         res.json({ notes })
+         res.json(notes)
       }
       catch (error) {
          res.status(500).send("Internal server error");
@@ -35,7 +36,7 @@ router.post('/addnote', fetchuser, [
          }
          const notes = new Note({ title, description, tag, user: req.user.id })
          const saveNote = await notes.save();
-         res.json({ saveNote })
+         res.json(saveNote)
       }
       catch (error) {
          res.status(500).send("Internal server error");
@@ -75,7 +76,7 @@ router.put('/updatenote/:id', fetchuser, [
          //update note
          note = await Note.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true })
 
-         res.json({ note })
+         res.json(note)
       }
       catch (error) {
          res.status(500).send("Internal server error");
@@ -99,7 +100,7 @@ router.delete('/deletenote/:id', fetchuser,
          //delete note
          note = await Note.findByIdAndDelete(req.params.id)
 
-         res.json({ Success: "Note Deleted", note })
+         res.json({ Success: "Note Deleted", note: note })
       }
       catch (error) {
          res.status(500).send("Internal server error");

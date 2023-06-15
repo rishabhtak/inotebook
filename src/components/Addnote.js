@@ -8,8 +8,8 @@ function Addnote() {
     const handleSubmit = (e) => {
         e.preventDefault();
         addNote(note.title, note.description, note.tag);
-
     }
+    
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
     }

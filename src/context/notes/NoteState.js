@@ -68,9 +68,17 @@ const NoteState = () => {
         setNotes(notes.concat(note));
     }
 
+    const deleteNote = (id) => {
+        const newNote = notes.filter((note) => {
+            return note._id !== id
+        })
+        setNotes(newNote);
+
+    }
+
 
     return (
-        <NoteContext.Provider value={{ notes, setNotes, addNote }}>
+        <NoteContext.Provider value={{ notes, setNotes, addNote, deleteNote }}>
             <Outlet />
         </NoteContext.Provider>
     )

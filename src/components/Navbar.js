@@ -4,9 +4,6 @@ import Alert from './Alert';
 
 function Navbar() {
     let location = useLocation();
-
-    React.useEffect(() => {
-    }, [location]);
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">

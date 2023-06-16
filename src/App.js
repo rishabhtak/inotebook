@@ -6,6 +6,9 @@ import NoteState from './context/notes/NoteState';
 import {
   createBrowserRouter,
 } from "react-router-dom";
+import Signup from './components/Signup';
+import Login from './components/Login';
+
 
 
 const App = createBrowserRouter([
@@ -15,6 +18,14 @@ const App = createBrowserRouter([
       {
         element: <Navbar />,
         children: [
+          {
+            path: "/login",
+            element: <Login />
+          },
+          {
+            path: "/signup",
+            element: <Signup />
+          },
           {
             path: "/",
             element: <Home />,

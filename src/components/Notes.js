@@ -1,4 +1,4 @@
-import React, { useContext, useState,useRef } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import NoteContext from '../context/notes/NoteContext';
 import NoteItem from './NoteItem';
 import Addnote from './Addnote';
@@ -6,7 +6,7 @@ import Addnote from './Addnote';
 function Notes() {
     console.log("Notes Props")
     const context = useContext(NoteContext);
-    const { notes,editNote } = context;
+    const { notes, editNote } = context;
     const [note, setNote] = useState({ id: '', title: '', description: '', tag: '' })
     const refClose = useRef(null)
 
@@ -51,13 +51,14 @@ function Notes() {
                         </div>
                         <div className="modal-footer">
                             <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" onClick={handleSubmit}>Save changes</button>
+                            <button disabled={note.title.length < 5 || note.description.length < 5} type="button" className="btn btn-primary" onClick={handleSubmit}>Save changes</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div className='row'>
                 <h2>Your Notes</h2>
+                {notes.length === 0 && "No Notes Available"}
                 {notes.map((note) => {
                     return <NoteItem key={note._id} updateNote={updateNote} note={note} />
                 })}</div>

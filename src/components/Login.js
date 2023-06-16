@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -7,6 +7,15 @@ const Login = () => {
   let navigate = useNavigate();
 
 
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      navigate('/')
+    }
+    else {
+        navigate('/login')
+    }
+
+}, [])
   const handleSubmit = async (e) => {
     e.preventDefault();
     // api to login

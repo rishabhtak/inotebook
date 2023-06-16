@@ -1,9 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [credentials, setcredentials] = useState({ email: "", password: "", confirmPassword: "", name: "" })
   let navigate = useNavigate();
+
+  
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      navigate('/')
+    }
+    else {
+        navigate('/signup')
+    }
+
+}, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

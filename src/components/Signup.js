@@ -7,24 +7,32 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // api to login
-    const response = await fetch("http://localhost:5000/api/auth/createuser", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: credentials.email, password: credentials.password, name: credentials.name })
-
-    });
-    const json = await response.json();
-    
-    if (json.success) {
-      localStorage.setItem('token', json.authToken);
-      navigate("/");
+    console.log(e.target.password.value)
+    if (e.target.password.value !== e.target.confirmPassword.value) {
+      alert('Password not matched')
     }
     else {
-      alert('invaild credential');
+      // api to login
+      const response = await fetch("http://localhost:5000/api/auth/createuser", {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: credentials.email, password: credentials.password, name: credentials.name })
+
+      });
+      const json = await response.json();
+
+      if (json.success) {
+        localStorage.setItem('token', json.authToken);
+        navigate("/");
+      }
+      else {
+        alert('invaild credential');
+      }
     }
+
+
   }
 
   const onChangeHandler = (e) => {
